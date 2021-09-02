@@ -3,7 +3,6 @@
 - RabbitMQ
 
 ![](readme/img1.png)
-<img src="readme/img1.png" width="400"/>
 ------------
 
 Start the community Docker image (for RabbitMQ 3.9, the latest series):
@@ -25,7 +24,7 @@ curl --location --request POST 'localhost:8080/emit/1' \
 INFO 10769 --- [enerContainer-1] com.kotlin.rabbitmqdemo.RabbitConfig     : simple.queue: (Body:'Hello, world!' MessageProperties [headers={}, contentType=text/plain, contentEncoding=UTF-8, contentLength=0, receivedDeliveryMode=PERSISTENT, priority=0, redelivered=false, receivedExchange=, receivedRoutingKey=simple.queue, deliveryTag=1, consumerTag=amq.ctag-Vfnyr7McYR66HwFAmlWvNw, consumerQueue=simple.queue])
 ```
 
-FANOUT_EXCHANGE:
+FANOUT EXCHANGE:
 ```
 curl --location --request POST 'localhost:8080/emit/2' \
 --header 'Content-Type: application/json' \
@@ -40,7 +39,7 @@ INFO 10769 --- [ntContainer#3-1] c.k.rabbitmqdemo.RabbitFanoutListener    : fano
 INFO 10769 --- [ntContainer#2-1] c.k.rabbitmqdemo.RabbitFanoutListener    : fanout.queue.1: (Body:'Hello, world!' MessageProperties [headers={}, contentType=text/plain, contentEncoding=UTF-8, contentLength=0, receivedDeliveryMode=PERSISTENT, priority=0, redelivered=false, receivedExchange=common.exchange, receivedRoutingKey=, deliveryTag=1, consumerTag=amq.ctag-BNzNjffJbzl6WTqTt0K81A, consumerQueue=fanout.queue.1])
 ```
 
-DIRECT_EXCHANGE:
+DIRECT EXCHANGE:
 ```
 curl --location --request POST 'localhost:8080/emit/3' \
 --header 'Content-Type: application/json' \
@@ -73,7 +72,7 @@ INFO 10769 --- [ntContainer#0-1] c.k.rabbitmqdemo.RabbitDirectListener    : dire
 INFO 10769 --- [ntContainer#1-1] c.k.rabbitmqdemo.RabbitDirectListener    : direct.queue.error: (Body:'Mesage with error' MessageProperties [headers={}, contentType=text/plain, contentEncoding=UTF-8, contentLength=0, receivedDeliveryMode=PERSISTENT, priority=0, redelivered=false, receivedExchange=direct.exchange, receivedRoutingKey=error, deliveryTag=1, consumerTag=amq.ctag-0791uvjZVnrG1zI9V-rZDQ, consumerQueue=direct.queue.error])
 ```
 
-TOPIC_EXCHANGE:
+TOPIC EXCHANGE:
 ```
 curl --location --request POST 'localhost:8080/emit/4' \
 --header 'Content-Type: application/json' \
