@@ -1,4 +1,3 @@
-- Kotlin
 - Spring Boot
 - RabbitMQ
 
