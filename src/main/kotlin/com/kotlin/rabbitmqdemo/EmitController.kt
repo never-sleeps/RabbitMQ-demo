@@ -1,5 +1,6 @@
 package com.kotlin.rabbitmqdemo
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.http.HttpStatus
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class EmitController(
 	@Qualifier("rabbitMqTemplate")
-	private val rabbitMqTemplate: RabbitTemplate
+	private val rabbitMqTemplate: RabbitTemplate,
+	private val objectMapper: ObjectMapper
 ) {
 
 	@PostMapping("/emit/1")
@@ -25,7 +27,7 @@ class EmitController(
 	@ResponseStatus(HttpStatus.OK)
 	fun emitToFanout(@RequestBody dto: MessageDto) {
 		rabbitMqTemplate.setExchange(RabbitFanoutConfig.FANOUT_EXCHANGE)
-		rabbitMqTemplate.convertAndSend(dto.message)
+		rabbitMqTemplate.convertAndSend(objectMapper.writeValueAsString(dto))
 	}
 
 	@PostMapping("/emit/3")
@@ -41,10 +43,4 @@ class EmitController(
 		rabbitMqTemplate.setExchange(RabbitTopicConfig.TOPIC_EXCHANGE)
 		rabbitMqTemplate.convertAndSend(dto.key, dto.message)
 	}
-
 }
-
-data class MessageDto(
-	val message: String,
-	val key: String
-)

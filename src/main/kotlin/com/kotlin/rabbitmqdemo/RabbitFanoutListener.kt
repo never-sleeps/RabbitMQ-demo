@@ -1,5 +1,7 @@
 package com.kotlin.rabbitmqdemo
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import com.kotlin.rabbitmqdemo.RabbitFanoutConfig.Companion.QUEUE_1
 import com.kotlin.rabbitmqdemo.RabbitFanoutConfig.Companion.QUEUE_2
 import mu.KotlinLogging
@@ -47,15 +49,21 @@ class RabbitFanoutConfig {
 }
 
 @Component
-class RabbitFanoutListener {
+class RabbitFanoutListener(
+	private val objectMapper: ObjectMapper
+) {
 	@RabbitListener(queues = [QUEUE_1])
 	fun onMessage1(message: Message) {
+		val dto = objectMapper.readValue<MessageDto>(String(message.body))
+		log.info("received object: $dto")
 		log.info("${message.messageProperties.consumerQueue}: $message")
 	}
 
 
 	@RabbitListener(queues = [QUEUE_2])
 	fun onMessage2(message: Message) {
+		val dto = objectMapper.readValue<MessageDto>(String(message.body))
+		log.info("received object: $dto")
 		log.info("${message.messageProperties.consumerQueue}: $message")
 	}
 

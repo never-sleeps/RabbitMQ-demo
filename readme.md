@@ -29,13 +29,15 @@ curl --location --request POST 'localhost:8080/emit/2' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "message": "Hello, world!",
-    "key": ""
+    "key": "any key"
 }'
 ```
 
 ```
-INFO 10769 --- [ntContainer#3-1] c.k.rabbitmqdemo.RabbitFanoutListener    : fanout.queue.2: (Body:'Hello, world!' MessageProperties [headers={}, contentType=text/plain, contentEncoding=UTF-8, contentLength=0, receivedDeliveryMode=PERSISTENT, priority=0, redelivered=false, receivedExchange=common.exchange, receivedRoutingKey=, deliveryTag=1, consumerTag=amq.ctag-oZFAgQiWSIKpVd9Q3bSwHA, consumerQueue=fanout.queue.2])
-INFO 10769 --- [ntContainer#2-1] c.k.rabbitmqdemo.RabbitFanoutListener    : fanout.queue.1: (Body:'Hello, world!' MessageProperties [headers={}, contentType=text/plain, contentEncoding=UTF-8, contentLength=0, receivedDeliveryMode=PERSISTENT, priority=0, redelivered=false, receivedExchange=common.exchange, receivedRoutingKey=, deliveryTag=1, consumerTag=amq.ctag-BNzNjffJbzl6WTqTt0K81A, consumerQueue=fanout.queue.1])
+INFO 7868 --- [ntContainer#3-1] c.k.rabbitmqdemo.RabbitFanoutListener    : received object: MessageDto(message=Hello, world!, key=any key)
+INFO 7868 --- [ntContainer#2-1] c.k.rabbitmqdemo.RabbitFanoutListener    : received object: MessageDto(message=Hello, world!, key=any key)
+INFO 7868 --- [ntContainer#3-1] c.k.rabbitmqdemo.RabbitFanoutListener    : fanout.queue.2: (Body:'{"message":"Hello, world!","key":"any key"}' MessageProperties [headers={}, contentType=text/plain, contentEncoding=UTF-8, contentLength=0, receivedDeliveryMode=PERSISTENT, priority=0, redelivered=false, receivedExchange=common.exchange, receivedRoutingKey=, deliveryTag=2, consumerTag=amq.ctag-HfD7SgmFKn2QPQD4IH847A, consumerQueue=fanout.queue.2])
+INFO 7868 --- [ntContainer#2-1] c.k.rabbitmqdemo.RabbitFanoutListener    : fanout.queue.1: (Body:'{"message":"Hello, world!","key":"any key"}' MessageProperties [headers={}, contentType=text/plain, contentEncoding=UTF-8, contentLength=0, receivedDeliveryMode=PERSISTENT, priority=0, redelivered=false, receivedExchange=common.exchange, receivedRoutingKey=, deliveryTag=2, consumerTag=amq.ctag-2G149QxYv9ctRoeqhZ0ZHA, consumerQueue=fanout.queue.1])
 ```
 
 DIRECT EXCHANGE:
