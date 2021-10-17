@@ -1,3 +1,5 @@
+![](https://img.shields.io/github/languages/top/never-sleeps/rabbitmq-demo)
+
 - Spring Boot
 - RabbitMQ
 
